@@ -124,6 +124,10 @@ nav {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+.focus-card{
+  padding-bottom: 18px;
+}
+
 .card h1 {
   font-size: 56px;
   margin: 0;
@@ -134,10 +138,23 @@ nav {
   color: #ff6fa5;
 }
 
-.card p {
-  color: #555;
+.card > p {
+  color: #f83b80;
   line-height: 1.7;
   margin-top: 10px;
+}
+
+.intro-info{
+  color: #444;
+  font-weight: 500;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.intro-desc{
+  color: #555;
+  line-height: 1.9;
+  margin-top: 22px;
 }
 
 /* ===== Right Profile ===== */
@@ -157,16 +174,29 @@ nav {
   object-fit: cover;
 }
 
-.tag {
+.tag{
   display: flex;
   justify-content: space-between;
-  padding: 15px;
-  border-top: 1px solid #eee;
-  font-size: 14px;
+  align-items: center;
+
+  padding: 10px 14px;
+  border-top: 1px solid #f1f1f1;
 }
 
-.tag b {
-  margin-left: auto;
+.tag span{
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 0.5px;
+}
+
+.tag b{
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+}
+
+.profile{
+  overflow: hidden;
 }
 
 /* ===== Responsive ===== */
@@ -216,7 +246,7 @@ nav {
 }
 
 .about-header span {
-  font-size: 13px;
+  font-size: 14px;
   color: #888;
 }
 
@@ -249,6 +279,59 @@ nav {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+.about-grid{
+  display: flex;
+  gap: 24px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.about-card{
+  flex: 1;
+  min-width: 280px;
+
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 28px;
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+}
+
+.about-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.about-top h3{
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+}
+
+.about-top span{
+  background: #ffe4ee;
+  color: #ff6fa5;
+
+  padding: 6px 14px;
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.about-card ul{
+  padding-left: 18px;
+}
+
+.about-card li{
+  margin-bottom: 14px;
+  color: #555;
+  line-height: 1.7;
+}
+
 /* Title */
 .about-title {
   display: flex;
@@ -258,10 +341,12 @@ nav {
 }
 
 .about-title span {
-  background: #ffe4ec;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 12px;
+    background: #ffe4ee;
+    color: #ff6fa5;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /* Biography */
@@ -284,7 +369,7 @@ nav {
 
 .bio-item p {
   margin: 5px 0 0;
-  font-weight: 500;
+  font-weight: 450;
 }
 
 /* Education */
@@ -303,6 +388,19 @@ nav {
 .edu-box p {
   margin-top: 5px;
   line-height: 1.6;
+}
+
+.skill-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.skill-tags span{
+    background: #fafafa;
+    padding: 12px;
+    border-radius: 15px;
 }
 
 /* Responsive */
@@ -364,7 +462,8 @@ nav {
 
 /* Button */
 .project-card button {
-  padding: 10px 18px;
+  padding: 8px 16px;
+  font-size: 14px;
   border: none;
   border-radius: 20px;
   background: #ff6fa5;
@@ -572,7 +671,7 @@ body.modal-open {
 }
 
 /* 🔥 tag tools */
-.tag {
+.tool-tag {
   display: inline-block;
   background: #ffffff;
   padding: 6px 14px;
@@ -844,6 +943,25 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
 }
+
+.about-card,
+.project-card,
+.contact-card{
+  transition: all .25s ease;
+  cursor: pointer;
+}
+
+.contact-card a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.about-card:hover,
+.project-card:hover,
+.contact-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
 </style>
 
 </head>
@@ -871,21 +989,29 @@ body.modal-open {
   <div class="card">
     <h1>PORT<span>FOLIO</span></h1>
 
-    <p><b>UX/UI Designer – Co-op Student</b></p>
+    <p><b>UX/UI Designer Intern</b></p>
 
-    <p>
-      นางสาว จุฑามาศ รื่นรมณ์<br>
-      นักศึกษาชั้นปีที่ 3 - วิทยาการคอมพิวเตอร์<br>
-      มหาวิทยาลัยเกษตรศาสตร์ เฉลิมพระเกียรติ สกลนคร (KUSE)<br>
-      คณะวิทยาศาสตร์และวิศวกรรมศาสตร์<br>
-      หลักสูตรสาขาวิชาวิทยาการคอมพิวเตอร์<br><br>
+        <div class="hero-text">
 
-      สนใจงานด้าน UX/UI Designer  
-      มีประสบการณ์ออกแบบ UI/UX ด้วย Figma และพัฒนา Web Prototype เพื่อทดสอบการใช้งานจริง  
-      โดยใช้ HTML, CSS และ JavaScript  
-      ให้ความสำคัญกับ User-Centered Design และการออกแบบที่ใช้งานง่าย  
-      พร้อมใช้ Generative AI เป็นเครื่องมือช่วยเพิ่มประสิทธิภาพในการออกแบบและพัฒนา
-    </p>
+      <p class="intro-info">
+        นางสาวจุฑามาศ รื่นรมณ์<br>
+        นักศึกษาชั้นปีที่ 4 สาขาวิทยาการคอมพิวเตอร์<br>
+        มหาวิทยาลัยเกษตรศาสตร์ เฉลิมพระเกียรติ สกลนคร<br>
+        คณะวิทยาศาสตร์และวิศวกรรมศาสตร์
+      </p>
+
+      <p class="intro-desc">
+      สนใจด้าน UX/UI Design และการออกแบบที่ยึดผู้ใช้เป็นศูนย์กลาง  
+      มีประสบการณ์ออกแบบ User Flow, Wireframe และ Prototype ด้วย Figma  
+      พร้อมพัฒนา Web Prototype ด้วย HTML, CSS และ JavaScript
+      </p>
+
+      <p class="intro-desc">
+      สนใจการออกแบบที่เน้น Usability และ Visual Hierarchy  
+      เพื่อให้ผู้ใช้งานเข้าถึงข้อมูลได้ง่าย พร้อมเรียนรู้และพัฒนาทักษะด้านการออกแบบอย่างต่อเนื่อง
+      </p>
+
+    </div>
   </div>
 
   <!-- Right -->
@@ -898,8 +1024,9 @@ body.modal-open {
     </div>
 
     <div class="tag">
-      <span>AVAILABLE FOR INTERNSHIP</span>
-      <b>พฤศจิกายน – มีนาคม 2570</b>
+      <span>INTERNSHIP PERIOD</span>
+      <b>พ.ย. 2569 – มี.ค. 2570</b>
+      
     </div>
   </div>
 </section>
@@ -943,6 +1070,16 @@ body.modal-open {
             <small>วันเกิด</small>
             <p>15 มีนาคม 2548</p>
           </div>
+
+          <div class="bio-item">
+            <small>เกรดเฉลี่ยนสะสม (GPAX):</small>
+            <p>3.68</p>
+          </div>
+
+          <div class="bio-item">
+            <small>Languages</small>
+            <p>Thai (Native), English (Basic)</p>
+          </div>
         </div>
       </div>
 
@@ -956,8 +1093,8 @@ body.modal-open {
         <div class="edu-box">
           <small>2566 - ปัจจุบัน</small>
           <p>
-            ระดับปริญญาตรี (ชั้นปีที่ 3)<br>
-            มหาวิทยาลัยเกษตรศาสตร์ เฉลิมพระเกียรติ สกลนคร<br>
+            ระดับปริญญาตรี (ชั้นปีที่ 4)<br>
+            มหาวิทยาลัยเกษตรศาสตร์ เฉลิมพระเกียรติ สกลนคร (KUSE)<br>
             สาขาวิชาวิทยาการคอมพิวเตอร์
           </p>
         </div>
@@ -966,7 +1103,7 @@ body.modal-open {
           <small>2563 - 2565</small>
           <p>
             ระดับ มัธยมศึกษาตอนปลาย<br>
-            นวมินทราชินูทิศ หอวัง นนทบุรี<br>
+            โรงเรียนนวมินทราชินูทิศ หอวัง นนทบุรี<br>
             แผนการเรียนอักษรศาสตร์-อังกฤษ
           </p>
         </div>
@@ -974,6 +1111,44 @@ body.modal-open {
       </div>
 
     </div>
+
+    <div class="about-grid">
+
+  <!-- Design Process -->
+  <div class="about-card">
+    <div class="about-top">
+      <h3>Design Process</h3>
+      <span>UX/UI</span>
+    </div>
+
+    <div class="skill-tags">
+      <span>User Flow</span>
+      <span>Wireframe</span>
+      <span>Prototype</span>
+      <span>Usability</span>
+      <span>Visual Hierarchy</span>
+    </div>
+  </div>
+
+  <!-- Tools & Skills -->
+  <div class="about-card">
+    <div class="about-top">
+      <h3>Tools & Skills</h3>
+      <span>Frontend</span>
+    </div>
+
+    <ul>
+    <div class="skill-tags">
+      <span>Figma</span>
+      <span>HTML / CSS</span>
+      <span>JavaScript</span>
+      <span>Canva</span>
+      <span>Responsive Design</span>
+    </div>
+    </ul>
+  </div>
+
+</div>
 
   </div>
 </section>
@@ -1064,21 +1239,25 @@ body.modal-open {
       <div class="contact-card" onclick="window.open('https://github.com/jutamasruenrom2005')">
         <div class="icon"><i class="fab fa-github"></i></div>
         <p>GITHUB</p>
+        <span>github.com/jutamasruenrom2005</span>
       </div>
 
       <div class="contact-card" onclick="window.open('https://www.facebook.com/share/1GFQR26BsF/?mibextid=wwXIfr')">
         <div class="icon"><i class="fab fa-facebook-f"></i></div>
         <p>FACEBOOK</p>
+        <span>Mint Jutamas</span>
       </div>
 
       <div class="contact-card" onclick="window.open('https://www.instagram.com/bxiimxnt?igsh=djNjM2tuNHF5aW1n&utm_source=qr')">
         <div class="icon"><i class="fab fa-instagram"></i></div>
         <p>INSTAGRAM</p>
+        <span>@bxiimxnt</span>
       </div>
 
       <div class="contact-card" onclick="window.open('https://line.me/ti/p/4IoVZstkjy')">
         <div class="icon"><i class="fab fa-line"></i></div>
         <p>LINE</p>
+        <span>mint-0928283376</span>
       </div>
 
     </div>
@@ -1283,7 +1462,7 @@ function openModal(projectKey) {
   
   // 🔥 สร้าง Tools Tags จากอาร์เรย์
   document.getElementById("modal-tools").innerHTML = project.tools
-    .map(tool => `<span class="tag">${tool}</span>`)
+    .map(tool => `<span class="tool-tag">${tool}</span>`)
     .join("");
 
   // 🔥 กำหนดรูปหลัก
